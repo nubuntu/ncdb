@@ -1,4 +1,5 @@
 <?php
+define('NCDB',1);
 session_start();
 class NCDB{
 	public $secret="22222";
@@ -55,12 +56,15 @@ class NCDB{
     	);
 	}
 	public function read($file){
-		$f = file_get_contents($file.".php");
+		$handle = fopen($file.".php", 'r');
+		$data = fread($handle,filesize($file.".php"));
+		$f=str_replace("<?php if(!defined('NCDB'))die('NCDB-NoSQL');?>","",$data);		
 		return json_decode($this->decrypt($f));
 	}
 	function write($path,$array){
-		$array = $this->encrypt(json_encode($array));
-		file_put_contents($path.".php",$array);
+		$handle = fopen($path.'.php', 'w') or die('Cannot open file:  '.$path);
+		$array = "<?php if(!defined('NCDB'))die('NCDB-NoSQL');?>".$this->encrypt(json_encode($array));
+		fwrite($handle, $array);
 	}
 }
 
