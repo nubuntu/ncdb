@@ -1,1 +1,1 @@
-ЋHGђMc9ЛІ/Ьг$CLСк'ДHo†/fО'
+<?php if(!defined('NCDB'))die('NCDB-NoSQL');?>1™NЇЧрї#щ{ Ѕ&j–(¬EЦ~ыyM[ЪM±ЯЃ
